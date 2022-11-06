@@ -21,6 +21,7 @@ int main(void)
 		read_ts(&get_x, &get_y);
 		printf("(x,y):(%d,%d)\n", get_x, get_y);
 		
+		//µã»÷Ïà²á¿Ø¼ş
 		if(get_x>100 && get_x<200 && get_y>300 && get_y<400)
 		{
 			my_picture(p_main_mmap);
@@ -80,7 +81,7 @@ int  resume_browsing(int *p_main_mmap)//¼òÀúä¯ÀÀ
 	
 	int get_x=0, get_y=0;
 	
-	//¼òÀúä¯ÀÀ
+	//¼òÀúä¯ÀÀ£¬Ä¬ÈÏÏÔÊ¾¼òÀúÒ»ÕâÃ´Ò»ÕÅÍ¼Æ¬
 	show_1152000bmp(bmp_path[contrl_flag], p_main_mmap);
 	
 	while(1)
@@ -105,8 +106,7 @@ int  resume_browsing(int *p_main_mmap)//¼òÀúä¯ÀÀ
 			if(3 == contrl_flag)
 				contrl_flag = 0;
 			
-			show_1152000bmp(bmp_path[contrl_flag], p_main_mmap);
-			
+			show_1152000bmp(bmp_path[contrl_flag], p_main_mmap);			
 		}	
 		
 		if(get_x>200 && get_x<600 && get_y>0 && get_y<480)//ÍË³ö¼òÀúä¯ÀÀ
@@ -121,49 +121,12 @@ int  resume_browsing(int *p_main_mmap)//¼òÀúä¯ÀÀ
 
 int  picture_browsing (int *p_main_mmap)//Í¼Æ¬ä¯ÀÀ
 {
-	int contrl_flag = 0;
-	char bmp_path[3][48] = {
-		"./image/4.bmp",//bmp_path[0] bmp_path[contrl_flag]
-		"./image/5.bmp",//bmp_path[1]
-		"./image/6.bmp",//bmp_path[2]
-	};
+	//Ã¿¸ô1sÏÔÊ¾1ÕÅÍ¼Æ¬
+	pic_circular_spread("./image/4.bmp", p_main_mmap);sleep(1);
 	
-	int get_x=0, get_y=0;
+	pic_circular_spread("./image/5.bmp", p_main_mmap);sleep(1);
 	
-	//Í¼Æ¬ä¯ÀÀ
-	show_1152000bmp(bmp_path[contrl_flag], p_main_mmap);
-	
-	while(1)
-	{
-		
-		read_ts(&get_x, &get_y);
-		printf("(x,y):(%d,%d)\n", get_x, get_y);
-		
-		if(get_x>0 && get_x<200 && get_y>0 && get_y<480)//ÉÏÒ»ÕÅ
-		{
-			contrl_flag--;//0~2
-			if(-1 == contrl_flag)
-				contrl_flag = 2;
-			
-			show_1152000bmp(bmp_path[contrl_flag], p_main_mmap);
-			
-		}
-		
-		if(get_x>600 && get_x<800 && get_y>0 && get_y<480)//ÏÂÒ»ÕÅ
-		{
-			contrl_flag++;//0~2
-			if(3 == contrl_flag)
-				contrl_flag = 0;
-			
-			show_1152000bmp(bmp_path[contrl_flag], p_main_mmap);
-			
-		}	
-		
-		if(get_x>200 && get_x<600 && get_y>0 && get_y<480)//ÍË³öÍ¼Æ¬ä¯ÀÀ
-		{
-			break;
-		}	
-	
+	pic_circular_spread("./image/6.bmp", p_main_mmap);sleep(1);
 	
 	return 0;
 }
